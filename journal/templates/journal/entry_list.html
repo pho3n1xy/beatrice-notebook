@@ -1,0 +1,29 @@
+{% extends "journal/base.html" %}
+
+{% block title %}My Journal Entries{% endblock %}
+
+{% block header_action %}
+    <!-- This link now points to the 'entry_create' URL so the button works -->
+    <a href="{% url 'journal:entry_create' %}" class="btn">New Entry</a>
+{% endblock %}
+
+{% block content %}
+    <h2>My Entries</h2>
+
+    {% for entry in entries %}
+        <!-- This link makes the entire card clickable, taking you to the detail page -->
+        <a href="{% url 'journal:entry_detail' entry.pk %}" class="card-link">
+            <div class="card">
+                <h3>{{ entry.entry_date|date:"l, F j, Y" }}</h3>
+                <p>{{ entry.waking_life_entry|truncatewords:20 }}</p>
+                <div class="entry-meta-small">
+                    <span>Rating: {{ entry.rating }}/10</span>
+                </div>
+            </div>
+        </a>
+    {% empty %}
+        <div class="card">
+            <p>You haven't written any journal entries yet. <a href="{% url 'journal:entry_create' %}">Create one now.</a></p>
+        </div>
+    {% endfor %}
+{% endblock %}

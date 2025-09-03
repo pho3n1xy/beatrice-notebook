@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Beatrice Notebook{% endblock %}</title>
+    <style>
+        :root {
+            --bg-color: #1c1c1e;
+            --card-bg-color: #2c2c2e; /* Renamed for consistency */
+            --text-color: #f2f2f7;
+            --secondary-text: #8e8e93;
+            --accent-color: #0a84ff;
+            --border-color: #38383a;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        h1, h2 {
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        a:hover {
+            opacity: 0.8;
+        }
+
+        header { /* Changed from .header to the header tag for semantics */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+
+        header h1 { /* Targeting the h1 tag */
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        header h1 a {
+            color: var(--text-color);
+        }
+
+        .header-meta {
+            text-align: center;
+            flex-grow: 1;
+        }
+        .counter {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+        .counter-label {
+            font-size: 0.8rem;
+            color: var(--secondary-text);
+        }
+
+        .btn {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .card {
+            background-color: var(--card-bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+    {% block styles %}{% endblock %}
+</head>
+<body>
+    <div class="container">
+        <header>
+            {# THE ONLY REQUIRED CHANGE IS UPDATING THIS LINK #}
+            <h1><a href="{% url 'journal:notebook_list' %}">Beatrice Notebook</a></h1>
+
+            <div class="header-meta">
+                {% if days_since_last_spill is not None %}
+                    <div class="counter">{{ days_since_last_spill }}</div>
+                    <div class="counter-label">Days Since Last Spill</div>
+                {% endif %}
+            </div>
+
+            <div class="header-actions">
+                 {% block header_action %}{% endblock %}
+            </div>
+        </header>
+
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,113 @@
+{% extends "journal/base.html" %}
+
+{% block title %}Entry for {{ entry.entry_date|date:"F d, Y" }}{% endblock %}
+
+{% block header_action %}
+    <a href="{% url 'journal:entry_edit' entry.pk %}" class="btn">Edit Entry</a>
+{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h1 style="margin-top: 0;">{{ entry.entry_date|date:"l, F j, Y" }}</h1>
+
+    <div class="entry-meta">
+        <span><strong>Day Rating:</strong> {{ entry.rating }}/10</span>
+        <span><strong>Moon Phase:</strong> {{ entry.moon_phase }}</span>
+    </div>
+
+    <hr>
+
+    <div class="entry-section">
+        <h2>How My Day Went</h2>
+        <p>{{ entry.waking_life_entry|linebreaks }}</p>
+    </div>
+
+    {% if entry.dream_entry %}
+    <div class="entry-section">
+        <h2>My Dreams</h2>
+        <p>{{ entry.dream_entry|linebreaks }}</p>
+    </div>
+    {% endif %}
+
+    {# THIS IS THE MODIFIED SECTION FOR "WHAT WENT WRONG" #}
+    {% if entry.what_went_wrong_items.all %}
+    <div class="entry-section">
+        <h2>What Went Wrong</h2>
+        <ul>
+            {% for item in entry.what_went_wrong_items.all %}
+                <li>{{ item.description }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <div class="entry-section">
+        <h2>Cup of Hermes</h2>
+        <p>
+            {% if entry.cup_spilled %}
+                The cup was spilled today.
+            {% else %}
+                The cup was not spilled today.
+            {% endif %}
+        </p>
+    </div>
+
+    {% if entry.non_negotiables.all %}
+    <div class="entry-section">
+        <h2>Non-Negotiables</h2>
+        <ul>
+            {% for item in entry.non_negotiables.all %}
+                <li>
+                    <strong>{{ item.name }}</strong> {% if item.completed %}(Completed){% endif %}
+                    {% if item.notes %}<p style="margin-top: 0.5rem; color: var(--secondary-text);">{{ item.notes|linebreaks }}</p>{% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+</div>
+
+<style>
+    .entry-meta {
+        display: flex;
+        gap: 2rem;
+        color: var(--secondary-text);
+        margin-bottom: 2rem;
+    }
+    hr {
+        border: none;
+        border-top: 1px solid var(--border-color);
+        margin: 2rem 0;
+    }
+    .entry-section {
+        margin-bottom: 2rem;
+    }
+    .entry-section h2 {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 0.5rem;
+    }
+    .entry-section p, .entry-section ul {
+        margin-top: 0;
+        line-height: 1.6;
+    }
+    .entry-section ul {
+        list-style: none; /* We'll use custom styling or just plain text */
+        padding-left: 0;
+    }
+    .entry-section li {
+        margin-bottom: 0.5rem; /* Tighter spacing for bullet points */
+        padding-left: 1rem;
+        position: relative;
+    }
+    /* Simple custom bullet point */
+    .entry-section li::before {
+        content: '•';
+        position: absolute;
+        left: 0;
+        color: var(--accent-color);
+    }
+</style>
+{% endblock %}

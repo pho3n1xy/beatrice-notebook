@@ -1,0 +1,56 @@
+{% extends "journal/base.html" %}
+
+{% block title %}{{ notebook.name }}{% endblock %}
+
+{% block header_action %}
+    <a href="{% url 'journal:entry_create' %}" class="btn">New Entry</a>
+{% endblock %}
+
+{% block content %}
+    <div class="notebook-header">
+        <h2>Entries in {{ notebook.name }}</h2>
+        <a href="{% url 'journal:notebook_edit' notebook.pk %}" class="btn btn-secondary">Edit Notebook</a>
+    </div>
+
+    {# THE FIX: We are wrapping each entry card in a link #}
+    {% for entry in notebook.entries.all %}
+        <a href="{{ entry.get_absolute_url }}" class="card-link">
+            <div class="card">
+                <h3>{{ entry.entry_date|date:"l, F j, Y" }}</h3>
+                <p>{{ entry.waking_life_entry|truncatewords:20 }}</p>
+                <div class="entry-meta-small">
+                    <span>Rating: {{ entry.rating }}/10</span>
+                </div>
+            </div>
+        </a>
+    {% empty %}
+        <div class="card">
+            <p>There are no entries in this notebook yet. <a href="{% url 'journal:entry_create' %}">Create one now.</a></p>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{% block styles %}
+<style>
+    .notebook-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+    .btn-secondary {
+        background-color: #555;
+        font-size: 0.8rem;
+        padding: 0.5rem 1rem;
+    }
+    /* We also need to add this style for the card-link to work properly */
+    .card-link {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+    }
+    .card-link:hover .card {
+        border-color: var(--accent-color);
+    }
+</style>
+{% endblock %}
