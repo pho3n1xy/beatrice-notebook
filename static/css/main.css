@@ -1,0 +1,71 @@
+body {
+    background-color: #1a1a1d; /* Dark charcoal background */
+    color: #f5f5f5; /* Off-white text */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: #2c2c34; /* Slightly lighter card background */
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+h2 {
+    color: #f5f5f5;
+    margin-bottom: 1.5rem;
+}
+
+/* Style Django's form fields */
+.container p {
+    margin-bottom: 1rem;
+}
+
+.container label {
+    display: none; /* Hides the default "Username:" and "Password:" labels */
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    margin-top: 8px;
+    background-color: #1a1a1d;
+    border: 1px solid #444;
+    border-radius: 5px;
+    color: #f5f5f5;
+    font-size: 16px;
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+}
+
+input[type="text"]::placeholder,
+input[type="password"]::placeholder {
+    color: #888;
+}
+
+.btn {
+    background-color: #007bff; /* Bright blue for the button */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    width: 100%;
+    margin-top: 1rem;
+    transition: background-color 0.2s;
+}
+
+.btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
