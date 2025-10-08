@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Beatrice Notebook{% endblock %}</title>
     <style>
+        /* Add this new class to your <style> block in base.html */
+        .btn-form {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-align: center;
+            border: none; /* Removes the default button border */
+            font-family: inherit; /* Makes the font match the rest of the page */
+            font-size: inherit; /* Makes the font size match */
+            cursor: pointer; /* Shows a pointer hand on hover */
+            -webkit-appearance: none; /* Removes default OS styling on Safari/Chrome */
+            -moz-appearance: none; /* Removes default OS styling on Firefox */
+            appearance: none;
+        }
+
         :root {
             --bg-color: #1c1c1e;
             --card-bg-color: #2c2c2e; /* Renamed for consistency */
@@ -109,7 +126,14 @@
             </div>
 
             <div class="header-actions">
-                 {% block header_action %}{% endblock %}
+                {% if user.is_authenticated %}
+                    <form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-form">Logout</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn">Login</a>
+                {% endif %}
             </div>
         </header>
 

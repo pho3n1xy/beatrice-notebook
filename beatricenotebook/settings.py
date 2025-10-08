@@ -55,7 +55,7 @@ ROOT_URLCONF = 'beatricenotebook.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -128,3 +128,10 @@ LOGIN_URL = 'login'
 
 # URL to redirect to after a successful login
 LOGIN_REDIRECT_URL = 'journal:notebook_list'
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/5.0/howto/static-files/
+STATIC_URL = 'static/'
+
+# Tell Django where to find your top-level static files directory
+STATICFILES_DIRS = [BASE_DIR / 'static']

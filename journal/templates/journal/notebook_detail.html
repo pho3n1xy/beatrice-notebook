@@ -3,13 +3,13 @@
 {% block title %}{{ notebook.name }}{% endblock %}
 
 {% block header_action %}
-    <a href="{% url 'journal:entry_create' %}" class="btn">New Entry</a>
-{% endblock %}
+    {% endblock %}
 
 {% block content %}
     <div class="notebook-header">
         <h2>Entries in {{ notebook.name }}</h2>
         <a href="{% url 'journal:notebook_edit' notebook.pk %}" class="btn btn-secondary">Edit Notebook</a>
+        <a href="{% url 'journal:entry_create' %}" class="btn">New Entry</a>
     </div>
 
     {# THE FIX: We are wrapping each entry card in a link #}

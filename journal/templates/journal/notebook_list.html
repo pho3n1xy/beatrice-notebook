@@ -3,13 +3,13 @@
 {% block title %}My Notebooks{% endblock %}
 
 {% block header_action %}
-    {# This button now correctly points to the 'notebook_create' URL #}
-    <a href="{% url 'journal:notebook_create' %}" class="btn">New Notebook</a>
-{% endblock %}
+    {% endblock %}
 
 {% block content %}
-    <h2>My Notebooks</h2>
-
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+        <h2>My Notebooks</h2>
+        <a href="{% url 'journal:notebook_create' %}" class="btn">New Notebook</a>
+    </div>
     {% for notebook in notebooks %}
         <a href="{{ notebook.get_absolute_url }}" class="card-link">
             <div class="card">

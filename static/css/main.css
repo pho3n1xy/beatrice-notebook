@@ -69,3 +69,108 @@ input[type="password"]::placeholder {
 .btn:hover {
     background-color: #0056b3; /* Darker blue on hover */
 }
+
+/* Add this new class to your <style> block in base.html */
+        .btn-form {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-align: center;
+            border: none; /* Removes the default button border */
+            font-family: inherit; /* Makes the font match the rest of the page */
+            font-size: inherit; /* Makes the font size match */
+            cursor: pointer; /* Shows a pointer hand on hover */
+            -webkit-appearance: none; /* Removes default OS styling on Safari/Chrome */
+            -moz-appearance: none; /* Removes default OS styling on Firefox */
+            appearance: none;
+        }
+
+        :root {
+            --bg-color: #1c1c1e;
+            --card-bg-color: #2c2c2e; /* Renamed for consistency */
+            --text-color: #f2f2f7;
+            --secondary-text: #8e8e93;
+            --accent-color: #0a84ff;
+            --border-color: #38383a;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        h1, h2 {
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        a:hover {
+            opacity: 0.8;
+        }
+
+        header { /* Changed from .header to the header tag for semantics */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+
+        header h1 { /* Targeting the h1 tag */
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        header h1 a {
+            color: var(--text-color);
+        }
+
+        .header-meta {
+            text-align: center;
+            flex-grow: 1;
+        }
+        .counter {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+        .counter-label {
+            font-size: 0.8rem;
+            color: var(--secondary-text);
+        }
+
+        .btn {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .card {
+            background-color: var(--card-bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 1.5rem;
+        }

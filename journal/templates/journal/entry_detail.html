@@ -3,12 +3,14 @@
 {% block title %}Entry for {{ entry.entry_date|date:"F d, Y" }}{% endblock %}
 
 {% block header_action %}
-    <a href="{% url 'journal:entry_edit' entry.pk %}" class="btn">Edit Entry</a>
-{% endblock %}
+    {% endblock %}
 
 {% block content %}
 <div class="card">
-    <h1 style="margin-top: 0;">{{ entry.entry_date|date:"l, F j, Y" }}</h1>
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h1 style="margin-top: 0;">{{ entry.entry_date|date:"l, F j, Y" }}</h1>
+        <a href="{% url 'journal:entry_edit' pk=entry.pk %}" class="btn">Edit Entry</a>
+    </div>
 
     <div class="entry-meta">
         <span><strong>Day Rating:</strong> {{ entry.rating }}/10</span>
