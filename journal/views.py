@@ -160,3 +160,10 @@ class JournalEntryUpdateView(LoginRequiredMixin, SpillCounterMixin, UpdateView):
 
     def get_queryset(self):
         return JournalEntry.objects.filter(user=self.request.user)
+
+
+
+class SignUpView(createView):
+    form_class = UserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'registration/sign.html'
