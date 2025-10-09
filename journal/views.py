@@ -7,6 +7,16 @@ from .forms import JournalEntryForm, NonNegotiableFormSet, WhatWentWrongFormSet,
 from django.views.generic.edit import UpdateView, CreateView
 from django.urls import reverse_lazy
 from django.utils import timezone
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import redirect
+
+def homepage_router_view(request):
+    if request.user.is_authenticated:
+        # If the user is logged in, send them to their notebook list
+        return redirect('journal:notebook_list')
+    else:
+        # If they are not logged in, send them to the login page
+        return redirect('login')
 
 # This mixin will handle the spill counter for all views
 class SpillCounterMixin:
@@ -163,7 +173,7 @@ class JournalEntryUpdateView(LoginRequiredMixin, SpillCounterMixin, UpdateView):
 
 
 
-class SignUpView(createView):
+class SignUpView(CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('login')
     template_name = 'registration/sign.html'

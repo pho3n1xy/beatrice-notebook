@@ -1,0 +1,12 @@
+{% extends "journal/base.html" %}
+
+{% block content %}
+<div class="card">
+    <h2>Sign Up</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="custom-btn">Sign Up</button>
+    </form>
+</div>
+{% endblock %}

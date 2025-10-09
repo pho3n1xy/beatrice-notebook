@@ -6,7 +6,8 @@ from .views import (
     NotebookUpdateView,
     JournalEntryDetailView,
     JournalEntryCreateView,
-    JournalEntryUpdateView
+    JournalEntryUpdateView, 
+    SignUpView
 )
 
 app_name = 'journal'
@@ -24,4 +25,7 @@ urlpatterns = [
     path('entry/<int:pk>/', JournalEntryDetailView.as_view(), name='entry_detail'),
     path('entry/new/', JournalEntryCreateView.as_view(), name='entry_create'),
     path('entry/<int:pk>/edit/', JournalEntryUpdateView.as_view(), name='entry_edit'),
+
+    #URL for signing up 
+    path('accounts/signup/', SignUpView.as_view(), name='signup')
 ]

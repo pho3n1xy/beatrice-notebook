@@ -17,15 +17,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
+from journal import views as journal_views
 
 urlpatterns = [
+    path('', journal_views.homepage_router_view, name='homepage_router'),
+
     path('admin/', admin.site.urls),
 
     # This line tells the project: "For any URL that starts with 'journal/',
     # hand off the rest of the URL to be handled by the 'journal.urls' file."
     path('journal/', include('journal.urls', namespace='journal')),
 
-    # add the paths for login and logout below
+    #paths for login and logout below
     path('accounts/login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
     path('accounts/logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
 ]
